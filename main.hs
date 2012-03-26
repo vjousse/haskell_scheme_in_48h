@@ -20,6 +20,13 @@ symbol = oneOf "!#$%&|*+-/:<=>?@^_~"
 parseNumber :: Parser LispVal
 parseNumber = liftM (Number . read) $ many1 digit
 
+-- Second solution with do notation
+-- parseNumber = do digits <- many1 digit
+--                  return $ (Number .read) $ digits
+
+-- Third solution with bind operator >>=
+-- parseNumber = many1 digit >>= return . (Number . read)
+
 parseString :: Parser LispVal
 parseString = do char '"'
                  x <- many (noneOf "\"")
