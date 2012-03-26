@@ -29,7 +29,7 @@ parseNumber = liftM (Number . read) $ many1 digit
 
 parseString :: Parser LispVal
 parseString = do char '"'
-                 x <- many ((char '\\' >> char '"') <|> noneOf "\"" )
+                 x <- many ((char '\\' >> oneOf "\"nrt\\") <|> noneOf "\"" )
                  char '"'
                  return $ String x
 
